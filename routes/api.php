@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => 'auth:sanctum'], function (){
+    Route::apiResource('/cars', \App\Http\Controllers\CarsController::class);
+});
+
+Route::post('/token/create', [\App\Http\Controllers\ApiTokenController::class, 'createToken']);
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+});
